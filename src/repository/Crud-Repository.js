@@ -53,7 +53,7 @@ class CrudRepository{
         } catch (error) {
             console.log("Error in CRUD Repository Layer");
             throw {error};
-        }
+        } 
     }
 }
 

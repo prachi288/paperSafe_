@@ -1,4 +1,4 @@
-const {CrudRepository} = require('./index');
+const CrudRepository = require('./Crud-Repository');
 const { MovieTicket } = require('../models/index');
 class MovieTicketRepository extends CrudRepository{
     constructor(){

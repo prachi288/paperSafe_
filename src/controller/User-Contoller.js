@@ -11,7 +11,7 @@ async function userRegistration(req, res){
             message: "User Successfully Registered"
         });
 
-    } catch (error) {
+    }catch(error) {
         console.log("Error in User Controller Layer");
         return res.status(500).json({
             data: {},
@@ -22,6 +22,53 @@ async function userRegistration(req, res){
     }
 }
 
+async function UserInfoUpdate(req,res){
+    try{
+        const id=req.params.id;
+        const data=req.body;
+
+        const response= await UserService.UserInfoUpdate(id,data);
+        return res.status(200).json({
+            data:response,
+            error:{},
+            success:true,
+            message:"User data is updated"
+        })
+    }catch(error) {
+        console.log("Error in User Controller Layer");
+        console.log(error)
+        return res.status(500).json({
+            data: {},
+            error: error,
+            success: false,
+            message: "Cannot update the data"
+        });
+    }
+}
+
+async function deleteUser(req, res){
+    try {
+        const id = req.params.id;
+
+        const response = await UserService.deleteUser(id);
+        return res.status(200).json({
+            data: response,
+            error:{},
+            success: true,
+            message: "User removed successfully"
+        })
+    } catch (error) {
+        console.log("Error in User Controller Layer");
+        return res.status(500).json({
+            data: {},
+            error: error,
+            success: false,
+            message: "Cannot delete user"
+        });
+    }
+}
 module.exports={
-    userRegistration
+    userRegistration,
+    UserInfoUpdate,
+    deleteUser
 }

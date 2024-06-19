@@ -1,4 +1,4 @@
-const {CrudRepository} = require('./index');
+const CrudRepository = require('./Crud-Repository');
 const { XMarkSheet } = require('../models/index');
 
 class XMarkSheetRepository extends CrudRepository{

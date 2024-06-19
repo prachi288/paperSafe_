@@ -1,4 +1,4 @@
-const {CrudRepository} = require('./index');
+const CrudRepository = require('./Crud-Repository');
 const { PANCard } = require('../models/index');
 
 class PANCardRepository extends CrudRepository{
