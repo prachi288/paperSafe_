@@ -8,7 +8,7 @@ const OTPsave=(emailID, otp)=>{
 
 const validateOTP=(emailID, otp)=>{
     const cachedOtp = otpCache.get(emailID);
-    if(cachedOtp && OTPsave === otp){
+    if(cachedOtp && cachedOtp === otp){
         otpCache.del(emailID);
         return true;
     }
