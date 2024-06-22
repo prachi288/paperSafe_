@@ -1,3 +1,4 @@
 module.exports={
-    UserRoutes:require('./User-routes')
+    UserRoutes:require('./User-routes'),
+    AadharCardRoutes:require('./AadharCard-routes')
 }

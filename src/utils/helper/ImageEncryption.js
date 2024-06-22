@@ -1,7 +1,7 @@
 const crypto=require('crypto')
 const fs = require('fs');
 const {Buffer}=require('buffer')
-const {pipeline}=require('stream')
+const {pipeline}=require('stream/promises')
 
 const {ENCRYPTION_KEY,ENCRYPTION_IV}=require('../../config/ServerConfig');
 
@@ -23,6 +23,4 @@ const encrypt=async(inputPath)=>{
     }
 };
 
-module.exports={
-    encrypt
-}
+module.exports= encrypt
