@@ -5,7 +5,11 @@ const panSchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
-    imageURL : {
+    version: {
+        type: Number,
+        required: true,
+    },
+    public_id : {
         type: String,
         required: true,
     },

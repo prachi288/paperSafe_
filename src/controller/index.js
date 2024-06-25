@@ -1,4 +1,5 @@
 module.exports={
     UserController: require('./User-Contoller'),
-    AadharCardController: require('./AadharCard-Controller')
+    AadharCardController: require('./AadharCard-Controller'),
+    PanCardController: require('./PanCard-Controller')
 }

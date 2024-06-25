@@ -1,4 +1,5 @@
 module.exports={
     UserService: require('./User-Service'),
-    AadharCardService: require('./AadharCard-Service')
+    AadharCardService: require('./AadharCard-Service'),
+    PanCardService: require('./PanCard-Services')
 }

@@ -3,15 +3,13 @@ const fs=require('fs');
 const path=require('path');
 const axios=require('axios')
 
-const {CLOUDINARY_CLOUD_NAME}=require('../config/ServerConfig')
-
-const {AadharCardRepository}=require('../repository/index')
+const {PANCardRepository}=require('../repository/index')
 const {encrypt}=require('../utils/helper/index')
 const {decrypt}=require('../utils/helper/ImageDecryption')
 
-const aadharCardRepository=new AadharCardRepository();
+const panCardRepository=new PANCardRepository();
 
-async function uploadAadhar(data, filePath){
+async function uploadPan(data, filePath){
     try{
         const encryptedFile = await encrypt(filePath);
 
@@ -28,21 +26,20 @@ async function uploadAadhar(data, filePath){
 
         data={...data, version: result.version, public_id: result.public_id};
 
-        const response=await aadharCardRepository.create(data);
+        const response=await panCardRepository.create(data);
         return response;
     }catch(error){
-        console.log("error in aadhar service layer");
+        console.log("error in Pan service layer");
         throw error;
     }
 }
 
-async function downloadAadhar(userID){
-    console.log("inside service")
+async function downloadPan(userID){
     try {
-        const aadhar=await aadharCardRepository.getByUserId(userID);
+        const pan=await panCardRepository.getByUserId(userID);
 
-        const version = aadhar.version;
-        const public_id = aadhar.public_id;
+        const version = pan.version;
+        const public_id = pan.public_id;
         const url = `https://res.cloudinary.com/dekzkwo7x/raw/upload/v${version}/` + public_id;
 
         // Write the encrypted file to the local filesystem
@@ -73,23 +70,23 @@ async function downloadAadhar(userID){
 
         return filePaths;
     } catch (error) {
-        console.log('error in aadhar service layer');
+        console.log('error in Pan service layer');
         throw error;
     }
 }
 
-async function deleteAadhar(userID){
+async function deletePan(userID){
     try {
-        const response= await aadharCardRepository.remove(userID);
+        const response= await panCardRepository.remove(userID);
         return response;
     } catch (error) {
-        console.log('error in Aadhar service layer');
+        console.log('error in Pan service layer');
         throw error;
     }
 }
 
 module.exports={
-    uploadAadhar,
-    downloadAadhar,
-    deleteAadhar,
+    uploadPan,
+    downloadPan,
+    deletePan
 }
