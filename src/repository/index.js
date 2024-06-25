@@ -5,6 +5,6 @@ module.exports={
     PANCardRepository: require('./PanCard-Repository'),
     MovieTicketRepository: require('./MovieTicket-Repository'),
     TrainTicketRepository: require('./TrainTicket-Repository'),
-    XIIMarkSheetRepository: require('./XIIMarksheet-Repository'),
-    XMarkSheetRepository: require('./XMarksheet-Repository'),
+    XIIMarksheetRepository: require('./XIIMarksheet-Repository'),
+    XMarksheetRepository: require('./XMarksheet-Repository'),
 }
