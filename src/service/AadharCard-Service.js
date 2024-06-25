@@ -1,9 +1,13 @@
 const cloudinary = require('cloudinary').v2;
 const fs=require('fs');
 const path=require('path');
+const axios=require('axios')
+
+const {CLOUDINARY_CLOUD_NAME}=require('../config/ServerConfig')
 
 const {AadharCardRepository}=require('../repository/index')
-const {encrypt,decrypt}=require('../utils/helper/index')
+const {encrypt}=require('../utils/helper/index')
+const {decrypt}=require('../utils/helper/ImageDecryption')
 
 const aadharCardRepository=new AadharCardRepository();
 
@@ -32,6 +36,60 @@ async function uploadAadhar(data, filePath){
     }
 }
 
+async function downloadAadhar(userID){
+    console.log("inside service")
+    try {
+        const aadhar=await aadharCardRepository.getByUserId(userID);
+
+        const version = aadhar.version;
+        const public_id = aadhar.public_id;
+        const url = `https://res.cloudinary.com/dekzkwo7x/raw/upload/v${version}/` + public_id;
+
+        // Write the encrypted file to the local filesystem
+        const encryptedFilePath = path.join(__dirname, '../downloads',`${public_id}.enc`);
+        const decryptedFilePath = path.join(__dirname, '../downloads',`${public_id}.jpg`);
+        
+        // Download the encrypted file
+        const response = await axios({
+            url,
+            method: 'GET',
+            responseType: 'stream',
+        });
+
+        const writeFile=fs.createWriteStream(encryptedFilePath);
+        response.data.pipe(writeFile);
+
+        await new Promise((resolve, reject) => {
+            writeFile.on('finish', resolve);
+            writeFile.on('error', reject);
+        });
+
+        await decrypt(encryptedFilePath, decryptedFilePath);
+
+        const filePaths = {
+            encryptedFilePath,
+            decryptedFilePath
+        }
+
+        return filePaths;
+    } catch (error) {
+        console.log('error in aadhar service layer');
+        throw error;
+    }
+}
+
+async function deleteAadhar(userID){
+    try {
+        const response=aadharCardRepository.remove(userID);
+        return response;
+    } catch (error) {
+        console.log('error in Aadhar service layer');
+        throw error;
+    }
+}
+
 module.exports={
-    uploadAadhar
+    uploadAadhar,
+    downloadAadhar,
+    deleteAadhar,
 }

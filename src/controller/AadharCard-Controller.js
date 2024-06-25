@@ -27,6 +27,62 @@ async function uploadAadharCard(req,res){
     }
 }
 
+async function downloadAadharCard(req,res){
+    console.log("inside controller")
+    try {
+        const userID=req.params.id;
+
+        const response=await AadharCardService.downloadAadhar(userID);
+
+        return res.status(200).sendFile(response.decryptedFilePath, (err) => {
+            if (err) {
+                throw err;
+            }
+            
+            fs.unlinkSync(response.encryptedFilePath);
+
+            // Clean up the decrypted file after sending it to the client
+            fs.unlinkSync(response.decryptedFilePath);
+        });
+
+    }catch(error) {
+        console.log("Error in Aadhar Controller Layer");
+        console.log(error)
+        return res.status(500).json({
+            data: {},
+            error: error,
+            success: false,
+            message: "Failed to download Aadhar Card"
+        });
+    }
+}
+
+async function deleteAadharCard(req,res){
+    try {
+        const userID=req.params.id;
+
+        const response=await AadharCardService.deleteAadhar(userID);
+        return res.status(200).json({
+            data: response,
+            error:{},
+            success: true,
+            message: "Aadhar Card Deleted"
+        });
+
+    }catch(error) {
+        console.log("Error in Aadhar Controller Layer");
+        console.log(error)
+        return res.status(500).json({
+            data: {},
+            error: error,
+            success: false,
+            message: "Failed to delete Aadhar Card"
+        });
+    }
+}
+
 module.exports={
     uploadAadharCard,
+    downloadAadharCard,
+    deleteAadharCard
 }
