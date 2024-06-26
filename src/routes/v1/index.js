@@ -4,5 +4,6 @@ module.exports={
     PanCardRoutes:require('./PanCard-routes'),
     XMarksheetRoutes:require('./XMarksheet-routes'),
     XIIMarksheetRoutes:require('./XIIMarksheet-routes'),
-    MovieTicketRoutes:require('./MovieTicket-routes')
+    MovieTicketRoutes:require('./MovieTicket-routes'),
+    TrainTicketRoutes:require('./TrainTicket-routes')
 }

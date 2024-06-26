@@ -17,7 +17,7 @@ class MovieTicketRepository extends CrudRepository{
         }
     }
 
-    async getByUserID(userID){
+    async getByUserId(userID){
         try {
             const response = await this.model.find({userID});
             return response;
