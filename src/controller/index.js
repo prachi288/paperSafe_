@@ -3,5 +3,6 @@ module.exports={
     AadharCardController: require('./AadharCard-Controller'),
     PanCardController: require('./PanCard-Controller'),
     XMarksheetController: require('./XMarksheet-Controller'),
-    XIIMarksheetController: require('./XIIMarksheet-Controller')
+    XIIMarksheetController: require('./XIIMarksheet-Controller'),
+    MovieTicketController: require('./MovieTicket-Controller')
 }

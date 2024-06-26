@@ -4,4 +4,5 @@ module.exports={
     PanCardService: require('./PanCard-Services'),
     XMarksheetService: require('./XMarksheet-Service'),
     XIIMarksheetService: require('./XIIMarksheet-Service'),
+    MovieTicketService: require('./MovieTicket-Service')
 }
