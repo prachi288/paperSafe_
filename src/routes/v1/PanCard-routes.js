@@ -9,6 +9,7 @@ console.log("Inside Pan Routes");
 
 router.post('/uploadPan',upload.single('pan'),PanCardController.uploadPanCard);
 router.get('/downloadPan/:id',PanCardController.downloadPanCard);
+router.get('panDetails/:id', PanCardController.getPanDetails);
 router.delete('/deletePan/:id',PanCardController.deletePanCard);
 
 module.exports = router;

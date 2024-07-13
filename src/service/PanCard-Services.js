@@ -75,6 +75,17 @@ async function downloadPan(userID){
     }
 }
 
+async function getPanDetails(userID){
+    try {
+      const response = await panCardRepository.getByUserID(userID);
+
+      return response;
+    } catch (error) {
+      console.log('Error in PAN Service Layer');
+      throw error;
+    }
+  }
+
 async function deletePan(userID){
     try {
         const response= await panCardRepository.remove(userID);
@@ -88,5 +99,6 @@ async function deletePan(userID){
 module.exports={
     uploadPan,
     downloadPan,
+    getPanDetails,
     deletePan
 }

@@ -55,6 +55,29 @@ async function downloadPanCard(req,res){
     }
 }
 
+async function getPanDetails(req, res){
+    try {
+        const userID = req.param.id;
+
+        const response = await PanCardService.getPanDetails(userID);
+
+        return res.status(200).json({
+            data: response,
+            error: {},
+            success: true,
+            message: "Successfully Fetched PAN Details"
+        });
+    } catch (error) {
+        console.log("Error in Controller Layer");
+        return res.status(500).json({
+            data: {},
+            error: {error},
+            success: false,
+            message: "Failed to Fetch PAN Details"
+        });
+    }
+}
+
 async function deletePanCard(req,res){
     try {
         const userID=req.params.id;
@@ -82,5 +105,6 @@ async function deletePanCard(req,res){
 module.exports={
     uploadPanCard,
     downloadPanCard,
+    getPanDetails,
     deletePanCard
 }
