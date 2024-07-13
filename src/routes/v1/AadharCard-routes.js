@@ -9,7 +9,7 @@ console.log("Inside Aadhar Routes");
 
 router.post('/uploadAadhar',upload.single('aadhar'),AadharCardController.uploadAadharCard);
 router.get('/downloadAadhar/:id',AadharCardController.downloadAadharCard);
-router.get('aadhaarDetails/:id', AadharCardController.getAadhaarDetails);
+router.get('/aadhaarDetails/:id', AadharCardController.getAadhaarDetails);
 router.delete('/deleteAadhar/:id',AadharCardController.deleteAadharCard);
 
 module.exports = router;
