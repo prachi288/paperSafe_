@@ -14,7 +14,8 @@ const panSchema = new mongoose.Schema({
         required: true,
     },
     panNumber : {
-        type: String
+        type: String,
+        required: true
     },
     isFavourite : {
         type : Boolean,

@@ -14,7 +14,8 @@ const aadhaarSchema = new mongoose.Schema({
         required: true,
     },
     aadhaarNumber : {
-        type: String
+        type: String,
+        required: true
     },
     isFavourite : {
         type : Boolean,
