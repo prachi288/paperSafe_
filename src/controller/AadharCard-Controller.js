@@ -57,6 +57,29 @@ async function downloadAadharCard(req,res){
     }
 }
 
+async function getAadhaarDetails(req, res){
+    try {
+        const userID = req.params.id;
+
+        const response = await AadharCardService.getAadhaarDetails(userID);
+
+        return res.status(200).json({
+            data: response,
+            error: {},
+            success: true,
+            message: "Successfully Fetched Aadhaar Details"
+        });
+    } catch (error) {
+        console.log("Error in Controller Layer");
+        return res.status(500).json({
+            data: {},
+            error: {error},
+            success: false,
+            message: "Failed to Fetch Aadhaar Details"
+        });
+    }
+}
+
 async function deleteAadharCard(req,res){
     try {
         const userID=req.params.id;
@@ -84,5 +107,6 @@ async function deleteAadharCard(req,res){
 module.exports={
     uploadAadharCard,
     downloadAadharCard,
+    getAadhaarDetails,
     deleteAadharCard
 }

@@ -78,6 +78,16 @@ async function downloadAadhar(userID){
     }
 }
 
+async function getAadhaarDetails(userID){
+    try {
+      const response = await aadharCardRepository.getByUserID(userID);
+      return response;
+    } catch (error) {
+      console.log('Error in Aadhaar Service Layer');
+      throw error;
+    }
+}
+
 async function deleteAadhar(userID){
     try {
         const response= await aadharCardRepository.remove(userID);
@@ -91,5 +101,6 @@ async function deleteAadhar(userID){
 module.exports={
     uploadAadhar,
     downloadAadhar,
+    getAadhaarDetails,
     deleteAadhar,
 }
