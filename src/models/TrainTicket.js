@@ -47,7 +47,8 @@ const trainTicketSchema = new mongoose.Schema({
     },
     userID : {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        ref:'User',
+        required: true
     }
 });
 
