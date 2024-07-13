@@ -48,7 +48,7 @@ class CrudRepository{
 
     async update(id, data){
         try {
-            const response = await this.model.findByIdAndUpdate(id, data);
+            const response = await this.model.findByIdAndUpdate(id, data,{new: true});
             return response;
         } catch (error) {
             console.log("Error in CRUD Repository Layer");
